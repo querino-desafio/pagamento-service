@@ -2,44 +2,40 @@ package com.silva.pagamento.regras_enum;
 
 import com.silva.pagamento.regras.*;
 
+import java.util.List;
+
 public enum TipoPagamentoEnum {
     PRODUTO_FISICO {
-        public void processarPagamento() {
-            pagamento = new PagamentoProdutoFisico();
-            pagamento.processarPagamento();
+        public List<String> processarPagamento() {
+            pagamentoContext = new PagamentoContext(new PagamentoProdutoFisico());
+            return pagamentoContext.processarPagamento();
         }
     },
     LIVRO {
-        public void processarPagamento() {
-            pagamento = new PagamentoLivro();
-            pagamento.processarPagamento();
+        public List<String> processarPagamento() {
+            pagamentoContext = new PagamentoContext(new PagamentoLivro());
+            return pagamentoContext.processarPagamento();
         }
     },
     NOVA_ASSOCIACAO {
-        public void processarPagamento() {
-            pagamento = new PagamentoNovaAssociacao();
-            pagamento.processarPagamento();
+        public List<String> processarPagamento() {
+            pagamentoContext = new PagamentoContext(new PagamentoNovaAssociacao());
+            return pagamentoContext.processarPagamento();
         }
     },
     UPGRADE_ASSOCIACAO {
-        public void processarPagamento() {
-            pagamento = new PagamentoUpgradeAssociacao();
+        public List<String> processarPagamento() {
+            pagamentoContext = new PagamentoContext(new PagamentoUpgradeAssociacao());
+            return pagamentoContext.processarPagamento();
         }
     },
     VIDEO() {
-        public void processarPagamento() {
-            pagamento = new PagamentoVideo();
-            pagamento.processarPagamento();
+        public List<String> processarPagamento() {
+            pagamentoContext = new PagamentoContext(new PagamentoVideo());
+            return pagamentoContext.processarPagamento();
         }
     };
-    private static Pagamento pagamento;
+    private static PagamentoContext pagamentoContext;
 
-    abstract void processarPagamento();
-
-    //TODO: Testar por aqui
-    public static void main(String[] args) {
-        for(TipoPagamentoEnum item: TipoPagamentoEnum.values()){
-            item.processarPagamento();
-        }
-    }
+    public abstract List<String> processarPagamento();
 }
