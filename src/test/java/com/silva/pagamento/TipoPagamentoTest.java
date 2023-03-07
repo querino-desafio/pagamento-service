@@ -1,18 +1,18 @@
 package com.silva.pagamento;
 
-import com.silva.pagamento.regras_enum.TipoPagamentoEnum;
+import com.silva.pagamento.regras_enum.TipoPagamento;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-class TipoPagamentoEnumTest {
+class TipoPagamentoTest {
 
-    private TipoPagamentoEnum tipoPagamento;
+    private TipoPagamento tipoPagamento;
 
     @Test
     void deveProcessarRoyaltiesEComissaoAoProcessarLivro() {
-        tipoPagamento = TipoPagamentoEnum.LIVRO;
+        tipoPagamento = TipoPagamento.LIVRO;
         List<String> processados = tipoPagamento.processarPagamento();
         Assertions.assertIterableEquals(List.of("ROYALTIES", "COMISSAO"), processados);
 
@@ -21,35 +21,35 @@ class TipoPagamentoEnumTest {
     @Test
         //TODO: DEVE FALHAR, teste contra falso positivo
     void deveFalharAoProcessarRoyaltiesEComissaoAoProcessarProdutoFisico() {
-        tipoPagamento = TipoPagamentoEnum.PRODUTO_FISICO;
+        tipoPagamento = TipoPagamento.PRODUTO_FISICO;
         List<String> processados = tipoPagamento.processarPagamento();
         Assertions.assertIterableEquals(List.of("ROYALTIES", "COMISSAO"), processados);
     }
 
     @Test
     void deveProcessarEnvioComissaoParaProdutoFisico() {
-        tipoPagamento = TipoPagamentoEnum.PRODUTO_FISICO;
+        tipoPagamento = TipoPagamento.PRODUTO_FISICO;
         List<String> processados = tipoPagamento.processarPagamento();
         Assertions.assertIterableEquals(List.of("ENVIO", "COMISSAO"), processados);
     }
 
     @Test
     void deveProcessarAssociacaoEmailParaNovaAssociacao() {
-        tipoPagamento = TipoPagamentoEnum.NOVA_ASSOCIACAO;
+        tipoPagamento = TipoPagamento.NOVA_ASSOCIACAO;
         List<String> processados = tipoPagamento.processarPagamento();
         Assertions.assertIterableEquals(List.of("ASSOCIACAO", "EMAIL"), processados);
     }
 
     @Test
     void deveProcessarUpgradeParaUpgrade() {
-        tipoPagamento = TipoPagamentoEnum.UPGRADE_ASSOCIACAO;
+        tipoPagamento = TipoPagamento.UPGRADE_ASSOCIACAO;
         List<String> processados = tipoPagamento.processarPagamento();
         Assertions.assertIterableEquals(List.of("UPGRADE"), processados);
     }
 
     @Test
     void deveProcessarVideoEVideoRelacionadoParaVideo() {
-        tipoPagamento = TipoPagamentoEnum.VIDEO;
+        tipoPagamento = TipoPagamento.VIDEO;
         List<String> processados = tipoPagamento.processarPagamento();
         Assertions.assertIterableEquals(List.of("VIDEO", "VIDEO_RELACIONADO"), processados);
     }

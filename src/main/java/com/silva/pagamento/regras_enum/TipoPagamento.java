@@ -4,7 +4,7 @@ import com.silva.pagamento.regras.*;
 
 import java.util.List;
 
-public enum TipoPagamentoEnum {
+public enum TipoPagamento {
     PRODUTO_FISICO {
         public List<String> processarPagamento() {
             pagamento = new PagamentoProdutoFisico();
