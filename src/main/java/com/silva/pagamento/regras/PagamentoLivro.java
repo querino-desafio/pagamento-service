@@ -1,8 +1,11 @@
 package com.silva.pagamento.regras;
 
+import lombok.extern.slf4j.Slf4j;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@Slf4j
 public class PagamentoLivro implements Pagamento {
 
     public static final List<String> processamentos = new ArrayList<>();
@@ -10,9 +13,9 @@ public class PagamentoLivro implements Pagamento {
     @Override
     public List<String> processarPagamento() {
         //integrar com sistema externo, cartões ou outros
-        System.out.println("Gera guia remessa duplicada para Royalties");
+        log.info("Gera guia remessa duplicada para Royalties");
         processamentos.add("ROYALTIES");
-        System.out.println("Gera comissão ao agente");
+        log.info("Gera comissão ao agente");
         processamentos.add("COMISSAO");
         return processamentos;
     }

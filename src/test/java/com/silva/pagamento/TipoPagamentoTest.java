@@ -19,18 +19,11 @@ class TipoPagamentoTest {
     }
 
     @Test
-        //TODO: DEVE FALHAR, teste contra falso positivo
-    void deveFalharAoProcessarRoyaltiesEComissaoAoProcessarProdutoFisico() {
-        tipoPagamento = TipoPagamento.PRODUTO_FISICO;
-        List<String> processados = tipoPagamento.processarPagamento();
-        Assertions.assertIterableEquals(List.of("ROYALTIES", "COMISSAO"), processados);
-    }
-
-    @Test
     void deveProcessarEnvioComissaoParaProdutoFisico() {
         tipoPagamento = TipoPagamento.PRODUTO_FISICO;
         List<String> processados = tipoPagamento.processarPagamento();
-        Assertions.assertIterableEquals(List.of("ENVIO", "COMISSAO"), processados);
+        Assertions.assertIterableEquals(List.of("ENVIO", "COMISSAO"), processados, "Lista de processados deveria conter ENVIO, COMISSAO");
+        Assertions.assertTrue(processados.containsAll(List.of("ENVIO", "COMISSAO")),"Lista de processados deveria conter ENVIO, COMISSAO");
     }
 
     @Test
