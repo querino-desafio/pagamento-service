@@ -2,44 +2,40 @@ package com.silva.pagamento.regras_enum;
 
 import com.silva.pagamento.regras.*;
 
+import java.util.List;
+
 public enum TipoPagamentoEnum {
     PRODUTO_FISICO {
-        public void processarPagamento() {
+        public List<String> processarPagamento() {
             pagamento = new PagamentoProdutoFisico();
-            pagamento.processarPagamento();
+            return pagamento.processarPagamento();
         }
     },
     LIVRO {
-        public void processarPagamento() {
+        public List<String> processarPagamento() {
             pagamento = new PagamentoLivro();
-            pagamento.processarPagamento();
+            return pagamento.processarPagamento();
         }
     },
     NOVA_ASSOCIACAO {
-        public void processarPagamento() {
+        public List<String> processarPagamento() {
             pagamento = new PagamentoNovaAssociacao();
-            pagamento.processarPagamento();
+            return pagamento.processarPagamento();
         }
     },
     UPGRADE_ASSOCIACAO {
-        public void processarPagamento() {
+        public List<String> processarPagamento() {
             pagamento = new PagamentoUpgradeAssociacao();
+            return pagamento.processarPagamento();
         }
     },
     VIDEO() {
-        public void processarPagamento() {
+        public List<String> processarPagamento() {
             pagamento = new PagamentoVideo();
-            pagamento.processarPagamento();
+            return pagamento.processarPagamento();
         }
     };
     private static Pagamento pagamento;
 
-    abstract void processarPagamento();
-
-    //TODO: Testar por aqui
-    public static void main(String[] args) {
-        for(TipoPagamentoEnum item: TipoPagamentoEnum.values()){
-            item.processarPagamento();
-        }
-    }
+    public abstract List<String> processarPagamento();
 }
